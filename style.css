@@ -1,17 +1,6 @@
-body {
-    font: 100%/1.5 sans-serif;
-    margin: 0 auto;
-    max-width: 40em;
-    padding: 1em;
+.theme-basic {
+    font-family: sans-serif;
 }
-
-.image-center {
-    display: block;
-    margin: 0 auto;
-    max-width: 100%;
-}
-
-
 
 .theme-markdown {
     font-family: monospace, monospace;
@@ -60,6 +49,19 @@ body {
 
 .theme-markdown label input[type="radio"]:checked ~ span::before {
     content: "[o] "
+}
+
+.theme-basic, .theme-markdown {
+    line-height: 1.5;
+    margin: 0 auto;
+    max-width: 40em;
+    padding: 1em;
+}
+
+.theme-basic .image-center, .theme-markdown .image-center {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
 }
 
 @media (prefers-color-scheme: dark) {
