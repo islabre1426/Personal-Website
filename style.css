@@ -1,0 +1,69 @@
+body {
+    font: 100%/1.5 sans-serif;
+    margin: 0 auto;
+    max-width: 40em;
+    padding: 1em;
+}
+
+.image-center {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+}
+
+
+
+.theme-markdown {
+    font-family: monospace, monospace;
+}
+
+.theme-markdown h1, .theme-markdown h2, .theme-markdown h3,
+.theme-markdown h4, .theme-markdown h5, .theme-markdown h6 {
+    font-size: 1em;
+}
+
+.theme-markdown h1::before {
+    content: "# ";
+}
+
+.theme-markdown h2::before {
+    content: "## ";
+}
+
+.theme-markdown h3::before {
+    content: "### ";
+}
+
+.theme-markdown h4::before {
+    content: "#### ";
+}
+
+.theme-markdown h5::before {
+    content: "##### ";
+}
+
+.theme-markdown h6::before {
+    content: "###### ";
+}
+
+.theme-markdown ul li {
+    list-style-type: "- ";
+}
+
+.theme-markdown input[type="radio"] {
+    display: none;
+}
+
+.theme-markdown label span::before {
+    content: "[ ] ";
+}
+
+.theme-markdown label input[type="radio"]:checked ~ span::before {
+    content: "[o] "
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #1e1e1e;
+    }
+}

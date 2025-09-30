@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+
+    <link rel="icon" href="imgs/logo/logo.png">
+    <link rel="stylesheet" href="style.css">
+
+    <title>Islabre's Personal Website</title>
+</head>
+<body>
+    <h1>Islabre's Personal Website</h1>
+    <p>Welcome! I'm Islabre. I like tech, cuteness, and thinking.</p>
+    <p>This is my personal website, where I post updates, fiddle around, and more.</p>
+
+    <h2 id="toc">Table of Content</h2>
+    <ul>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#logo">Logo</a></li>
+        <li><a href="#themes">Themes</a></li>
+        <li><a href="#update">Update</a></li>
+    </ul>
+
+    <h2 id="contact">Contact</h2>
+    <p>You can contact me via email: <a href="mailto:islabre1426@proton.me">islabre1426@proton.me</a></p>
+    <p>Alternatively, you can chat via Discord and my username is islabre. Though, make sure to send an email, as I usually ignore friend requests unless I chat with them before.</p>
+
+    <h2 id="logo">Logo</h2>
+    <p>You think my logo is cool? Thanks I guess. Here's the full image:</p>
+    <img class="image-center" src="imgs/logo/logo.png" alt="Logo for this website, depicting blue arrow-like shape in north-east direction">
+
+    <h2 id="themes">Themes</h2>
+    <p>Apply a different theme to this website! Choose predefined one below (require JavaScript):</p>
+    <ul id="themes-selection">
+        <li>
+            <label>
+                <input type="radio" name="theme" id="theme-basic" value="theme-basic" checked>
+                <span>Basic</span>
+            </label>
+        </li>
+        <li>
+            <label>
+                <input type="radio" name="theme" id="theme-markdown" value="theme-markdown">
+                <span>Markdown</span>
+            </label>
+        </li>
+    </ul>
+
+    <h2 id="update">Update</h2>
+    <!--
+    Template (replace $today with YYYY-mm-dd date):
+
+    <article>
+        <h3><time datetime="$today">$today</time></h3>
+
+    </article>
+    -->
+    <article>
+        <h3><time datetime="2025-09-30">2025-09-30</time></h3>
+        
+        <p>Hi! This is my first update. I'm doing single page website now, and you cannot stop me :3</p>
+        <p>Why not just use Social Media, you said? Because I want a personal layout, and fun.</p>
+        <p>Also, I'm tired of over-complicating myself with Static Site Generator, so I will write HTML by hand.</p>
+    </article>
+
+    <script src="./main.js"></script>
+</body>
+</html>
