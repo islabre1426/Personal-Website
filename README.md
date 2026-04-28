@@ -1,5 +1,5 @@
-# islabre1426.gitlab.io
-My personal website. Currently written in pure HTML, CSS, and JS. Deployed to GitLab Pages.
+# islabre1426.github.io
+My personal website. Currently rebuilding from scratch with 11ty.
 
 ## License
 - Source code is under [MIT License](./LICENSE)
