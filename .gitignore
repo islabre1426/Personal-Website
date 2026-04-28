@@ -1,1 +1,5 @@
+# npm-generated folder
 node_modules/
+
+# 11ty-generated folder
+_site
