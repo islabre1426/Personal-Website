@@ -1,5 +1,5 @@
-# islabre1426.github.io
-My personal website. Currently rebuilding from scratch with 11ty.
+# Personal Website
+My personal website, built using 11ty.
 
 ## License
 - Source code is under [MIT License](./LICENSE)
