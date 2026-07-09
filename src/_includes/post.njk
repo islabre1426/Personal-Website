@@ -1,0 +1,8 @@
+{% extends "page.njk" %}
+
+{% block main %}
+    <h1>{{ title }}</h1>
+    <i><time datetime="{{ page.date.toISOString() }}">{{ page.date.toDateString() }}</time></i>
+
+    {{ content | safe }}
+{% endblock %}
