@@ -5,6 +5,23 @@ body {
     padding: 1em;
 }
 
+pre, :not(pre) > code {
+    border: 1px solid;
+}
+
+:not(pre) > code, pre > code {
+    font-family: monospace, monospace;
+}
+
+pre {
+    padding: 0.5em;
+    overflow: auto;
+}
+
+:not(pre) > code {
+    padding: 0.25em;
+}
+
 @media (prefers-color-scheme: dark) {
     body {
         background-color: #1f1f1f;

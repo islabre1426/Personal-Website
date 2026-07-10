@@ -3,14 +3,18 @@
 set -eu
 
 help="\
-$(basename "$0") title
+$(basename "$0") title|date
     
 Positional arguments:
     title   Change title of the page
+    date    Update date of the page
 
 Sub-arguments for title:
     PATH    Path of the folder containing page
     TITLE   Title to change
+
+Sub-arguments for date:
+    PATH    Path of the folder containing page
 "
 
 if [ $# -eq 0 ]; then
@@ -40,6 +44,15 @@ case $input in
         sed -i -E "s/^title: (.*)$/title: $title/" "$new_path/index.md"
 
         printf "%s\n" "Changed title of page inside $path to $title"
+        ;;
+
+    "date")
+        path="$1"
+        now="$(date +"%Y-%m-%dT%H:%M:%S%:z")"
+
+        sed -i -E "s/^date: (.*)$/date: $now/" "$path/index.md"
+
+        printf "%s\n" "Updated date of page inside $path to $now"
         ;;
     
     *)
