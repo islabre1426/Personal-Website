@@ -22,6 +22,10 @@ pre {
     padding: 0.25em;
 }
 
+img {
+    max-width: 100%;
+}
+
 @media (prefers-color-scheme: dark) {
     body {
         background-color: #1f1f1f;
