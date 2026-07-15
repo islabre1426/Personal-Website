@@ -81,3 +81,36 @@ Anyway, here's now I setup [Anubis](https://anubis.techaro.lol/) to help stoppin
     ```
 
 6. Visit this website. If you see Anubis splash screen then you're good to go!
+
+## UPDATE
+It seems that this is not enough. I need to combine Anubis with rate-limiting to stop them from requesting this website too much.
+
+To do it, add the following to `/etc/nginx/conf.d/rate-limiting.conf`:
+```
+limit_req_zone $binary_remote_addr zone=perip:10m rate=1r/s;
+limit_req_zone $server_name zone=perserver:10m rate=10r/s;
+```
+
+Update `/etc/nginx/conf.d/personal-website.conf`:
+```
+...
+server {
+    listen 443 ssl;
+    server_name islabre.fyi;
+    root /var/www/html/Personal-Website;
+
+    ...
+
+    limit_req zone=perip burst=5 nodelay;
+    limit_req zone=perserver burst=10;
+
+    ...
+}
+...
+```
+
+And, test the configuration before reloading:
+```
+nginx -t
+systemctl restart nginx.service
+```
