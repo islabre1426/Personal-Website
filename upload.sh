@@ -5,6 +5,7 @@ set -eu
 artifact="_site/"
 remote_host="root@personal-server"
 name="Personal-Website"
+dest="/srv"
 
 if [ -d "$artifact" ]; then
     echo "Cleaning up old artifact."
@@ -15,6 +16,9 @@ echo "Building website."
 npm run build
 
 echo "Syncing content to remote server."
-rsync -av --delete "$artifact" "$remote_host:/var/www/html/$name/"
+cp -r "$artifact" "$name"
+ssh "$remote_host" rm -r "$dest/$name"
+tar -cz "$name" | ssh "$remote_host" tar -C "$dest" -xz
+rm -r "$name"
 
 echo "Successfully uploaded."
