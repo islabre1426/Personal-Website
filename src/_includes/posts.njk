@@ -4,7 +4,7 @@
     {{ super() }}
     
     <ul>
-        {%- for post in collections.post | reverse -%}
+        {%- for post in collections.posts | reverse -%}
         <li>
             <i><time datetime="{{ post.date.toISOString() }}">{{ post.date.toDateString() }}</time></i>
             -
