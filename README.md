@@ -4,7 +4,7 @@ My personal website, built using 11ty.
 ## Dependencies
 - NodeJS + npm
 - Unix utilities (basename, sed, tr, etc.) (Git Bash or a Unix-like OS preferred)
-- rsync
+- tar
 - ssh (for authorizing remote server, setup first)
 
 ## License
