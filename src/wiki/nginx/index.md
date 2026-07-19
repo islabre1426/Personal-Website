@@ -25,6 +25,8 @@ server {
     limit_req zone=perip burst=5;
     limit_req zone=perserver burst=10;
 
+    add_header Cache-Control no-cache;
+
     ssl_certificate /etc/nginx/ssl/islabre.fyi/cert.pem;
     ssl_certificate_key /etc/nginx/ssl/islabre.fyi/key.pem;
 
@@ -34,7 +36,9 @@ server {
 }
 ```
 
-The empty `location / {}` block is needed to stop path traversal attack.
+Note:
+- The empty `location / {}` block is needed to stop path traversal attack
+- This website does not version files, so it's benefical to revalidate server files each time using `Cache-Control: no-cache` header
 
 ## Rate-limiting
 Essential for slowing down bots.
