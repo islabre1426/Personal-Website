@@ -34,7 +34,7 @@ case $input in
         parent_path="$(dirname "$path")"
 
         title_slug="$(echo "$title" |\
-                    sed -E "s/[^a-zA-Z0-9 -]+/-/g; s/ +/-/g" |\
+                    sed -E "s/[^a-zA-Z0-9 -.]+/-/g; s/ +/-/g" |\
                     tr "[[:upper:]]" "[[:lower:]]")"
 
         new_path="$parent_path/$title_slug"

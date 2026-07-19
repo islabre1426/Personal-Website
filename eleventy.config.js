@@ -1,4 +1,5 @@
 import markdownIt from 'markdown-it';
+import taskLists from 'markdown-it-task-lists';
 import { feedPlugin } from '@11ty/eleventy-plugin-rss';
 
 const markdownOptions = {
@@ -25,6 +26,7 @@ const rssOptions = {
 
 export default async function(eleventyConfig) {
     eleventyConfig.setLibrary('md', markdownIt(markdownOptions));
+    eleventyConfig.amendLibrary('md', (mdLib) => mdLib.use(taskLists, { enabled: true }));
     
     eleventyConfig.addPassthroughCopy('src/assets');
 

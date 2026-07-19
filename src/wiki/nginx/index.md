@@ -1,0 +1,47 @@
+---
+title: nginx
+---
+
+My web server of choice.
+
+## Serving website
+The following uses this website configuration as example.
+
+```
+# /etc/nginx/conf.d/personal-website.conf
+
+# For undefined domain
+server {
+    listen 443 ssl;
+    ssl_reject_handshake on;
+    return 444;
+}
+
+server {
+    listen 443 ssl;
+    server_name islabre.fyi;
+    root /var/www/html/Personal-Website;
+
+    limit_req zone=perip burst=5;
+    limit_req zone=perserver burst=10;
+
+    ssl_certificate /etc/nginx/ssl/islabre.fyi/cert.pem;
+    ssl_certificate_key /etc/nginx/ssl/islabre.fyi/key.pem;
+
+    location / {
+
+    }
+}
+```
+
+The empty `location / {}` block is needed to stop path traversal attack.
+
+## Rate-limiting
+Essential for slowing down bots.
+
+```
+# /etc/nginx/conf.d/rate-limiting.conf
+
+limit_req_zone $binary_remote_addr zone=perip:10m rate=1r/s;
+limit_req_zone $server_name zone=perserver:10m rate=10r/s;
+```
