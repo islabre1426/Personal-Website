@@ -22,7 +22,7 @@ Also, make sure you created the folder for these keys.
 
 ```
 # acme.sh --install-cert -d islabre.fyi \
-    --cert-file /etc/nginx/ssl/islabre.fyi/cert.pem \
+    --fullchain-file /etc/nginx/ssl/islabre.fyi/cert.pem \
     --key-file /etc/nginx/ssl/islabre.fyi/key.pem \
     --reloadcmd "service nginx force-reload"
 ```
