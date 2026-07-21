@@ -27,8 +27,8 @@ server {
 
     add_header Cache-Control no-cache;
 
-    ssl_certificate /etc/nginx/ssl/islabre.fyi/cert.pem;
-    ssl_certificate_key /etc/nginx/ssl/islabre.fyi/key.pem;
+    ssl_certificate /etc/ssl/certs/islabre.fyi/cert.pem;
+    ssl_certificate_key /etc/ssl/certs/islabre.fyi/key.pem;
 
     location / {
 
