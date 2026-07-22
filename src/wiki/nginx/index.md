@@ -4,18 +4,22 @@ title: nginx
 
 My web server of choice.
 
+## Block undefined domain
+```
+# /etc/nginx/conf.d/undefined.conf
+
+server {
+    listen 443 ssl default_server;
+    ssl_reject_handshake on;
+    return 444;
+}
+```
+
 ## Serving website
 The following uses this website configuration as example.
 
 ```
 # /etc/nginx/conf.d/personal-website.conf
-
-# For undefined domain
-server {
-    listen 443 ssl;
-    ssl_reject_handshake on;
-    return 444;
-}
 
 server {
     listen 443 ssl;
@@ -46,6 +50,6 @@ Essential for slowing down bots.
 ```
 # /etc/nginx/conf.d/rate-limiting.conf
 
-limit_req_zone $binary_remote_addr zone=perip:10m rate=1r/s;
-limit_req_zone $server_name zone=perserver:10m rate=10r/s;
+limit_req_zone $binary_remote_addr zone=perip:10m rate=5r/s;
+limit_req_zone $server_name zone=perserver:10m rate=15r/s;
 ```
