@@ -4,6 +4,11 @@ title: nginx
 
 My web server of choice.
 
+## Installation
+```
+# apt install nginx
+```
+
 ## Block undefined domain
 ```
 # /etc/nginx/conf.d/undefined.conf

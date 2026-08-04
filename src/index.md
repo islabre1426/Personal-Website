@@ -3,7 +3,7 @@ title: Home
 permalink: /
 ---
 
-Hi there! I'm Islabre, a person who likes tech, cuteness, and thinking.
+Hi there! I'm Islabre, a disillusioned techie who also like cuteness and thinking.
 
 This is my personal website, [where I write](/posts/) about tech and life, and messing around.
 
