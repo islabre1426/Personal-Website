@@ -34,7 +34,8 @@ server {
     limit_req zone=perip burst=5;
     limit_req zone=perserver burst=10;
 
-    add_header Cache-Control no-cache;
+    expires 1d;
+    add_header Cache-Control must-revalidate;
 
     ssl_certificate /etc/ssl/certs/islabre.fyi/cert.pem;
     ssl_certificate_key /etc/ssl/certs/islabre.fyi/key.pem;
@@ -47,7 +48,7 @@ server {
 
 Note:
 - The empty `location / {}` block is needed to stop path traversal attack
-- This website does not version files, so it's benefical to revalidate server files each time using `Cache-Control: no-cache` header
+- It's benefical to cache pages to speed up UX (1 day cache seems to be enough)
 
 ## Rate-limiting
 Essential for slowing down bots.
