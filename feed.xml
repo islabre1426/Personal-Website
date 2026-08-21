@@ -5,12 +5,23 @@
   <subtitle>The personal website of Islabre, a person who likes tech, cuteness, and thinking</subtitle>
   <link href="https://islabre.fyi/feed.xml" rel="self" />
   <link href="https://islabre.fyi/" />
-  <updated>2026-08-06T12:56:03Z</updated>
+  <updated>2026-08-21T02:04:02Z</updated>
   <id>https://islabre.fyi/</id>
   <author>
     <name>Islabre</name>
     <email>islabre1426@disroot.org</email>
   </author>
+  <entry>
+    <title>Moving on</title>
+    <link href="https://islabre.fyi/posts/moving-on/" />
+    <updated>2026-08-21T02:04:02Z</updated>
+    <id>https://islabre.fyi/posts/moving-on/</id>
+    <content type="html">&lt;p&gt;Because life is too short to fight technology, and having non-tech hobbies is more fulfilling.&lt;/p&gt;
+&lt;p&gt;I will move back to GitHub and stop self-hosting.&lt;/p&gt;
+&lt;p&gt;Thank you Hetzner, Codeberg, etc. It was nice using them.&lt;/p&gt;
+&lt;p&gt;See you later.&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>Choose your own battle</title>
     <link href="https://islabre.fyi/posts/choose-your-own-battle/" />
