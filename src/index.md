@@ -12,4 +12,4 @@ If you want to comment, do so via email: personal at islabre dot fyi.
 ## Elsewhere
 Other way to see me is via one of the following services.
 
-- Codeberg: [islabre1426](https://codeberg.org/islabre1426)
+- GitHub: [islabre1426](https://github.com/islabre1426)
