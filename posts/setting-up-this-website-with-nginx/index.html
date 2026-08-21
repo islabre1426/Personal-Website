@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+
+    <link rel="stylesheet" href="/assets/style.css">
+    <link rel="icon" href="/assets/favicon.png">
+
+    <title>Setting up this website with Nginx - Islabre's Personal Website</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/">Home</a>
+            |
+            <a href="#menu">Menu &downarrow;</a>
+        </nav>
+    </header>
+
+    <hr>
+
+    <main>
+        
+    <h1>Setting up this website with Nginx</h1>
+    <i><time datetime="2026-07-10T10:46:45.000Z">Fri Jul 10 2026</time></i>
+
+    <p>This is a little tutorial on setting up Nginx to serve this website.</p>
+<p>At first, I went with Coolify since it provides me ease of deployment. Later I decided to wipe the server and start over since the tech stack is too complex for my taste, and I want to learn how to set it up myself.</p>
+<h2>Prerequisites</h2>
+<ul>
+<li>A server that can be SSH'd to (I use Hetzner with Debian 13 installed)</li>
+<li>A domain (I registered one from Porkbun)</li>
+<li>SSL Certificate, so this website can be served over HTTPS (Porkbun provides this as a bundle after them setting up SSL for my domain)</li>
+</ul>
+<h2>Setup</h2>
+<ol>
+<li>
+<p>SSH to the server (make sure you set this up first):</p>
+<pre><code>ssh personal-server
+</code></pre>
+</li>
+<li>
+<p>Update the server (if required, restart the server using <code>reboot</code> command):</p>
+<pre><code>apt update &amp;&amp; apt upgrade
+</code></pre>
+</li>
+<li>
+<p>Install nginx:</p>
+<pre><code>apt install nginx
+</code></pre>
+</li>
+<li>
+<p>Enable nginx on startup:</p>
+<pre><code>systemctl enable --now nginx
+</code></pre>
+</li>
+<li>
+<p>Add the following content to <code>/etc/nginx/conf.d/personal-website.conf</code>:</p>
+<pre><code>server {
+    listen 443 ssl;
+    server_name islabre.fyi;
+    ssl_certificate /etc/ssl/islabre.fyi-ssl-bundle/domain.cert.pem;
+    ssl_certificate_key /etc/ssl/islabre.fyi-ssl-bundle/private.key.pem;
+
+    location / {
+        root /var/www/html/Personal-Website;
+    }
+}
+</code></pre>
+</li>
+<li>
+<p>On the host, <code>rsync</code> both the website's build artifact and the SSL bundle to the server:</p>
+<pre><code>cd /path/to/Personal-Website/
+npm run build
+rsync -av --delete _site/ root@personal-server:/var/www/html/Personal-Website/
+</code></pre>
+<pre><code>cd /path/to/folder/contain/islabre.fyi-ssl-bundle
+rsync -av --delete islabre.fyi-ssl-bundle/ root@personal-server:/etc/ssl/islabre.fyi-ssl-bundle/
+</code></pre>
+</li>
+<li>
+<p>On the server, restart nginx:</p>
+<pre><code>systemctl restart nginx
+</code></pre>
+</li>
+<li>
+<p>Go to <a href="https://islabre.fyi">https://islabre.fyi</a>. If the website shows up then you're done!</p>
+</li>
+</ol>
+
+
+    </main>
+
+    <hr>
+
+    <footer>
+        <h2>Menu navigation</h2>
+        <ul id="menu">
+            <li><a href="/">Home</a></li>
+            <li><a href="/posts/">Posts</a></li>
+            <li><a href="/wiki/">Wiki</a></li>
+        </ul>
+        <small>
+            <a href="https://codeberg.org/islabre1426/Personal-Website">Source code of this website</a>. <br>
+            No ads. No tracking. No cookies.
+        </small>
+    </footer>
+</body>
+</html>

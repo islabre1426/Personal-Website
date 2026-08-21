@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+
+    <link rel="stylesheet" href="/assets/style.css">
+    <link rel="icon" href="/assets/favicon.png">
+
+    <title>Setup Checklist - Islabre's Personal Website</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/">Home</a>
+            |
+            <a href="#menu">Menu &downarrow;</a>
+        </nav>
+    </header>
+
+    <hr>
+
+    <main>
+        
+    <h1>Setup Checklist</h1>
+    <i>Last Updated: <time datetime="2026-08-21T01:19:09.841Z">Fri Aug 21 2026</time></i>
+
+    <p>If you setup a new server for the first time for serving web content, this is a checklist for what to do.</p>
+<h2>Prerequisite</h2>
+<ul>
+<li>A server with an OS installed (I use Hetzner Cloud with Debian)</li>
+<li>A domain (I use Porkbun)</li>
+<li>Basic Linux terminal knowledge (e.g. how to SSH to the server)</li>
+</ul>
+<h2>Setup</h2>
+<ul class="contains-task-list">
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Update the system<pre><code># apt update &amp;&amp; apt upgrade
+</code></pre>
+</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Install a firewall<pre><code># apt install ufw
+</code></pre>
+</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Setup firewall:
+<ul class="contains-task-list">
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Default: deny incoming, allow outgoing (default configuration for <code>ufw</code>)</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Allow: port 443 (HTTPS)</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Limit: port 22 (SSH, to help with brute-force attack)</li>
+</ul>
+<pre><code># ufw allow https
+# ufw limit ssh
+</code></pre>
+</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Enable firewall</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Install web server, log analyzer, and ACME client (for SSL)<pre><code># apt install nginx goaccess acme.sh
+</code></pre>
+</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Configure nginx <a href="../nginx/">via this entry</a></li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Setup SSL certificate using your ACME client (<a href="../acme.sh/">see this entry for acme.sh example</a>)</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Deploy your web content to the server</li>
+</ul>
+
+
+    </main>
+
+    <hr>
+
+    <footer>
+        <h2>Menu navigation</h2>
+        <ul id="menu">
+            <li><a href="/">Home</a></li>
+            <li><a href="/posts/">Posts</a></li>
+            <li><a href="/wiki/">Wiki</a></li>
+        </ul>
+        <small>
+            <a href="https://codeberg.org/islabre1426/Personal-Website">Source code of this website</a>. <br>
+            No ads. No tracking. No cookies.
+        </small>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+
+    <link rel="stylesheet" href="/assets/style.css">
+    <link rel="icon" href="/assets/favicon.png">
+
+    <title>Anubis is now protecting this website - Islabre's Personal Website</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/">Home</a>
+            |
+            <a href="#menu">Menu &downarrow;</a>
+        </nav>
+    </header>
+
+    <hr>
+
+    <main>
+        
+    <h1>Anubis is now protecting this website</h1>
+    <i><time datetime="2026-07-14T13:57:35.000Z">Tue Jul 14 2026</time></i>
+
+    <p>Guess we cannot have peace operating on the web without these bots trying to scrape this website:
+<img src="/assets/images/nginx-log.png" alt="nginx log showing requests from bots scraping this website"></p>
+<p>I only start this website like a week ago and I have to deal with this!?</p>
+<p>Sad.</p>
+<p>Anyway, here's now I setup <a href="https://anubis.techaro.lol/">Anubis</a> to help stopping them.</p>
+<h1>Setup</h1>
+<ol>
+<li>
+<p>As always, SSH to the server first:</p>
+<pre><code>ssh personal-server
+</code></pre>
+</li>
+<li>
+<p>Install Anubis deb from GitHub:</p>
+<pre><code>curl -fLO https://github.com/TecharoHQ/anubis/releases/download/v1.25.0/anubis_1.25.0_amd64.deb
+apt install ./anubis_1.25.0_amd64.deb
+</code></pre>
+</li>
+<li>
+<p>Copying default configuration so I could do it for each website I serve:</p>
+<pre><code>cp /etc/anubis/default.env /etc/anubis/personal-website.env
+cp /usr/share/doc/anubis/botPolicies.yaml /etc/anubis/personal-website.botPolicies.yaml
+</code></pre>
+</li>
+<li>
+<p>Configure <code>/etc/anubis/personal-website.env</code>:</p>
+<pre><code>BIND=:8923
+BIND_ADDRESS=tcp
+DIFFICULTY=4
+METRICS_BIND=:9090
+SERVE_ROBOTS_TXT=0
+POLICY_FNAME=/etc/anubis/personal-website.botPolicies.yaml
+TARGET=http://localhost:7797
+</code></pre>
+</li>
+<li>
+<p>Configure <code>/etc/nginx/conf.d/personal-website.conf</code> to use Anubis:</p>
+<pre><code>upstream anubis {
+    server localhost:8923;
+}
+
+server {
+    listen 443 ssl;
+    server_name islabre.fyi;
+    root /var/www/html/Personal-Website;
+
+    ssl_certificate /etc/letsencrypt/live/islabre.fyi/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/islabre.fyi/privkey.pem; # managed by Certbot
+
+    location / {
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Http-Version $server_protocol;
+        proxy_pass http://anubis;
+    }
+}
+
+server {
+    listen localhost:7797;
+    server_name islabre.fyi;
+    root /var/www/html/Personal-Website;
+
+    location / {
+
+    }
+}
+</code></pre>
+</li>
+<li>
+<p>Start Anubis and restart nginx:</p>
+<pre><code>systemctl enable --now anubis@personal-website.service
+systemctl restart nginx.service
+</code></pre>
+</li>
+<li>
+<p>Visit this website. If you see Anubis splash screen then you're good to go!</p>
+</li>
+</ol>
+<h2>UPDATE</h2>
+<p>It seems that this is not enough. I need to combine Anubis with rate-limiting to stop them from requesting this website too much.</p>
+<p>To do it, add the following to <code>/etc/nginx/conf.d/rate-limiting.conf</code>:</p>
+<pre><code>limit_req_zone $binary_remote_addr zone=perip:10m rate=1r/s;
+limit_req_zone $server_name zone=perserver:10m rate=10r/s;
+</code></pre>
+<p>Update <code>/etc/nginx/conf.d/personal-website.conf</code>:</p>
+<pre><code>...
+server {
+    listen 443 ssl;
+    server_name islabre.fyi;
+    root /var/www/html/Personal-Website;
+
+    ...
+
+    limit_req zone=perip burst=5 nodelay;
+    limit_req zone=perserver burst=10;
+
+    ...
+}
+...
+</code></pre>
+<p>And, test the configuration before reloading:</p>
+<pre><code>nginx -t
+systemctl restart nginx.service
+</code></pre>
+
+
+    </main>
+
+    <hr>
+
+    <footer>
+        <h2>Menu navigation</h2>
+        <ul id="menu">
+            <li><a href="/">Home</a></li>
+            <li><a href="/posts/">Posts</a></li>
+            <li><a href="/wiki/">Wiki</a></li>
+        </ul>
+        <small>
+            <a href="https://codeberg.org/islabre1426/Personal-Website">Source code of this website</a>. <br>
+            No ads. No tracking. No cookies.
+        </small>
+    </footer>
+</body>
+</html>

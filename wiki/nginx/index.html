@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+
+    <link rel="stylesheet" href="/assets/style.css">
+    <link rel="icon" href="/assets/favicon.png">
+
+    <title>nginx - Islabre's Personal Website</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/">Home</a>
+            |
+            <a href="#menu">Menu &downarrow;</a>
+        </nav>
+    </header>
+
+    <hr>
+
+    <main>
+        
+    <h1>nginx</h1>
+    <i>Last Updated: <time datetime="2026-08-21T01:19:09.841Z">Fri Aug 21 2026</time></i>
+
+    <p>My web server of choice.</p>
+<h2>Installation</h2>
+<pre><code># apt install nginx
+</code></pre>
+<h2>Block undefined domain</h2>
+<pre><code># /etc/nginx/conf.d/undefined.conf
+
+server {
+    listen 443 ssl default_server;
+    ssl_reject_handshake on;
+    return 444;
+}
+</code></pre>
+<h2>Serving website</h2>
+<p>The following uses this website configuration as example.</p>
+<pre><code># /etc/nginx/conf.d/personal-website.conf
+
+server {
+    listen 443 ssl;
+    server_name islabre.fyi;
+    root /var/www/html/Personal-Website;
+
+    limit_req zone=perip burst=5;
+    limit_req zone=perserver burst=10;
+
+    expires 1d;
+    add_header Cache-Control must-revalidate;
+
+    ssl_certificate /etc/ssl/certs/islabre.fyi/cert.pem;
+    ssl_certificate_key /etc/ssl/certs/islabre.fyi/key.pem;
+
+    location / {
+
+    }
+}
+</code></pre>
+<p>Note:</p>
+<ul>
+<li>The empty <code>location / {}</code> block is needed to stop path traversal attack</li>
+<li>It's benefical to cache pages to speed up UX (1 day cache seems to be enough)</li>
+</ul>
+<h2>Rate-limiting</h2>
+<p>Essential for slowing down bots.</p>
+<pre><code># /etc/nginx/conf.d/rate-limiting.conf
+
+limit_req_zone $binary_remote_addr zone=perip:10m rate=5r/s;
+limit_req_zone $server_name zone=perserver:10m rate=15r/s;
+</code></pre>
+
+
+    </main>
+
+    <hr>
+
+    <footer>
+        <h2>Menu navigation</h2>
+        <ul id="menu">
+            <li><a href="/">Home</a></li>
+            <li><a href="/posts/">Posts</a></li>
+            <li><a href="/wiki/">Wiki</a></li>
+        </ul>
+        <small>
+            <a href="https://codeberg.org/islabre1426/Personal-Website">Source code of this website</a>. <br>
+            No ads. No tracking. No cookies.
+        </small>
+    </footer>
+</body>
+</html>

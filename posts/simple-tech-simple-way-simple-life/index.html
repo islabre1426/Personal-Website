@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+
+    <link rel="stylesheet" href="/assets/style.css">
+    <link rel="icon" href="/assets/favicon.png">
+
+    <title>Simple tech, simple way, simple life - Islabre's Personal Website</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/">Home</a>
+            |
+            <a href="#menu">Menu &downarrow;</a>
+        </nav>
+    </header>
+
+    <hr>
+
+    <main>
+        
+    <h1>Simple tech, simple way, simple life</h1>
+    <i><time datetime="2026-07-16T10:44:40.000Z">Thu Jul 16 2026</time></i>
+
+    <p>I like simple tech and simple way of doing things. If a job requires multiple steps with complicated technology, I won't be willing to do it.</p>
+<h2>Server</h2>
+<p>For example, I want a way to visualize web server log. I looked at solution like Prometheus and Grafana, and I was like &quot;nah not gonna do this&quot;.</p>
+<p>...until I saw <a href="https://goaccess.io/">GoAccess</a>.</p>
+<p>I was like &quot;view web server log directly in the terminal? That looks so cool!&quot;</p>
+<p>What I needed to do is:</p>
+<pre><code>sudo apt install goaccess
+sudo goaccess /var/log/caddy/personal-website.access.log --log-format CADDY
+</code></pre>
+<p>That's it. No further setup needed. And it does what I wanted: a way to view web server log visually.</p>
+<p>Wanting to keep the dashboard running? Attach a <code>tmux</code> session and run <code>goaccess</code> inside it.</p>
+<p>Simple.</p>
+<p>Other piece of tech I started using is Caddy. I wanted to have automatic HTTPS without having to deal with <code>certbot</code> and simple configuration syntax.</p>
+<p>At first, I hesitate from using it due to it not having rate-limiting feature. It is provided as a 3rd-party module and I need to use <code>xcaddy</code> to compile it.</p>
+<p>Well, on the bright side, it provides simple way to configure wildcard certificate for Porkbun.</p>
+<p>My <code>Caddyfile</code> is just like this:</p>
+<pre><code>{
+    acme_dns porkbun {
+        api_key {env.PORKBUN_API_KEY}
+        api_secret_key {env.PORKBUN_API_SECRET_KEY}
+    }
+}
+
+(rate_limit) {
+    rate_limit {
+        zone static {
+            match {
+                method GET HEAD POST
+            }
+
+            key static
+            events 10
+            window 1s
+        }
+
+        log_key
+    }
+}
+
+islabre.fyi {
+    root /srv/Personal-Website
+    file_server
+
+    log {
+        output file /var/log/caddy/personal-website.access.log
+    }
+
+    import rate_limit
+}
+</code></pre>
+<p>Also, no more Anubis. I should utilize normal firewall like <code>ufw</code> instead.</p>
+<p>Keep it simple.</p>
+<h2>Website</h2>
+<p>This website looks simple and barebone. It's my choice. This UI style is applied to many projects I started.</p>
+<p>Why? Because it's lightweight and fast. And I don't have to debug my UI often.</p>
+<p>If you don't like it, it's fine. I'm not here to please you.</p>
+<p>I'm capable of making pretty UI if I'm willing to. I decided to stay simple instead.</p>
+<h2>Why?</h2>
+<p>Why stay simple? Why be &quot;boring&quot;? Why?</p>
+<p>Because complexity costs everything, from money to my sanity.</p>
+<p>And by staying simple, I can be more flexible.</p>
+<p>Maybe this resonate with you.</p>
+<p>See you.</p>
+
+
+    </main>
+
+    <hr>
+
+    <footer>
+        <h2>Menu navigation</h2>
+        <ul id="menu">
+            <li><a href="/">Home</a></li>
+            <li><a href="/posts/">Posts</a></li>
+            <li><a href="/wiki/">Wiki</a></li>
+        </ul>
+        <small>
+            <a href="https://codeberg.org/islabre1426/Personal-Website">Source code of this website</a>. <br>
+            No ads. No tracking. No cookies.
+        </small>
+    </footer>
+</body>
+</html>

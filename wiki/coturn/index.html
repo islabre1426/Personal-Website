@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+
+    <link rel="stylesheet" href="/assets/style.css">
+    <link rel="icon" href="/assets/favicon.png">
+
+    <title>coturn - Islabre's Personal Website</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/">Home</a>
+            |
+            <a href="#menu">Menu &downarrow;</a>
+        </nav>
+    </header>
+
+    <hr>
+
+    <main>
+        
+    <h1>coturn</h1>
+    <i>Last Updated: <time datetime="2026-08-21T01:19:09.841Z">Fri Aug 21 2026</time></i>
+
+    <p>TURN server implementation. Currently used for <a href="https://codeberg.org/islabre1426/tempchat">tempchat</a>.</p>
+<p>You can use my server as relay, with respect.</p>
+<ul>
+<li>URL: turn:turn.islabre.fyi:5349</li>
+<li>Username: webrtc-turn</li>
+<li>Password: webrtc-turn</li>
+</ul>
+<h2>Installation</h2>
+<pre><code># apt install coturn
+</code></pre>
+<h2>Setup</h2>
+<pre><code># /etc/default/coturn
+
+# Allow coturn to be started as system service
+TURNSERVER_ENABLED=1
+</code></pre>
+<pre><code># /etc/turnserver.conf
+
+realm=islabre.fyi
+server-name=turn.islabre.fyi
+
+listening-ip=0.0.0.0
+external-ip=&lt;your server IP&gt;
+
+# Logging behavior
+fingerprint
+log-file=/var/log/turnserver.log
+verbose
+
+# SSL
+cert=/etc/ssl/certs/islabre.fyi/cert.pem
+pkey=/etc/ssl/certs/islabre.fyi/key.pem
+tls-listening-port=5349
+
+# Auth for TURN
+lt-cred-mech
+user=webrtc-turn:webrtc-turn
+
+# Default configuration
+syslog
+no-rfc5780
+no-stun-backward-compatibility
+response-origin-only-with-rfc5780
+</code></pre>
+<h2>Apply configuration</h2>
+<pre><code># systemctl restart coturn.service
+</code></pre>
+<p>And test endpoint <code>turn:turn.islabre.fyi:5349</code> via free TURN server tester on the internet.</p>
+
+
+    </main>
+
+    <hr>
+
+    <footer>
+        <h2>Menu navigation</h2>
+        <ul id="menu">
+            <li><a href="/">Home</a></li>
+            <li><a href="/posts/">Posts</a></li>
+            <li><a href="/wiki/">Wiki</a></li>
+        </ul>
+        <small>
+            <a href="https://codeberg.org/islabre1426/Personal-Website">Source code of this website</a>. <br>
+            No ads. No tracking. No cookies.
+        </small>
+    </footer>
+</body>
+</html>

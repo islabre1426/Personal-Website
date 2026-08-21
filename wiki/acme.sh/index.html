@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+
+    <link rel="stylesheet" href="/assets/style.css">
+    <link rel="icon" href="/assets/favicon.png">
+
+    <title>acme.sh - Islabre's Personal Website</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/">Home</a>
+            |
+            <a href="#menu">Menu &downarrow;</a>
+        </nav>
+    </header>
+
+    <hr>
+
+    <main>
+        
+    <h1>acme.sh</h1>
+    <i>Last Updated: <time datetime="2026-08-21T01:19:09.841Z">Fri Aug 21 2026</time></i>
+
+    <p>My <a href="https://en.wikipedia.org/wiki/Automatic_Certificate_Management_Environment">ACME</a> client of choice, since it supports <a href="https://porkbun.com/">Porkbun</a>.</p>
+<h2>Installation</h2>
+<pre><code># apt install acme.sh
+</code></pre>
+<h2>Issuing certificate</h2>
+<p>Using this website's domain as example. Also issuing wildcard certificate for subdomain use.</p>
+<pre><code># export PORKBUN_API_KEY=&quot;&lt;API key&gt;&quot;
+# export PORKBUN_SECRET_API_KEY=&quot;&lt;API secret key&gt;&quot;
+# acme.sh --register-account -m &quot;&lt;your email&gt;&quot;
+# acme.sh --issue --dns dns_porkbun -d islabre.fyi -d &quot;*.islabre.fyi&quot;
+</code></pre>
+<h2>Installing certificate</h2>
+<p>Any services that is included in <code>--reloadcmd</code> need to be configured with the SSL path before invoking below commands.</p>
+<pre><code># mkdir -p /etc/ssl/certs/islabre.fyi
+# acme.sh --install-cert -d islabre.fyi \
+    --fullchain-file /etc/ssl/certs/islabre.fyi/cert.pem \
+    --key-file /etc/ssl/certs/islabre.fyi/key.pem \
+    --reloadcmd &quot;systemctl restart nginx coturn&quot;
+</code></pre>
+<h2>Installing cron job for auto-renewal</h2>
+<p>Needed when using <code>acme.sh</code> provided by the distribution's package manager (<code>apt</code> in this case).</p>
+<pre><code># crontab -l # Check for existing acme.sh job
+# acme.sh --install-cronjob
+</code></pre>
+
+
+    </main>
+
+    <hr>
+
+    <footer>
+        <h2>Menu navigation</h2>
+        <ul id="menu">
+            <li><a href="/">Home</a></li>
+            <li><a href="/posts/">Posts</a></li>
+            <li><a href="/wiki/">Wiki</a></li>
+        </ul>
+        <small>
+            <a href="https://codeberg.org/islabre1426/Personal-Website">Source code of this website</a>. <br>
+            No ads. No tracking. No cookies.
+        </small>
+    </footer>
+</body>
+</html>
