@@ -9,7 +9,7 @@ My personal website, built using 11ty.
 ```bash
 git clone https://github.com/islabre1426/islabre1426.github.io && cd islabre1426.github.io
 npm install
-npm run dev # Preview website
+npm run dev
 ```
 
 ## License
