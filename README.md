@@ -1,13 +1,15 @@
-# islabre1426.github.io
+# Personal Website
 My personal website, built using 11ty.
 
 ## Dependencies
 - NodeJS + npm
 - Unix utilities (basename, sed, tr, etc.) (Git Bash or a Unix-like OS preferred)
+- rsync
+- ssh (for authenticating server, setup first)
 
 ## Preview website from source
 ```bash
-git clone https://github.com/islabre1426/islabre1426.github.io && cd islabre1426.github.io
+git clone https://github.com/islabre1426/Personal-Website && cd Personal-Website
 npm install
 npm run dev
 ```
