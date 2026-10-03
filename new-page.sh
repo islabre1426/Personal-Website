@@ -7,7 +7,7 @@ default_path="src/posts"
 
 help="\
 $(basename "$0") [--help] [TITLE] [PATH] [page|post]
-    
+
 Optional argument:
     --help      Show this message, ignoring other parameters
     TITLE       Title of the page (default: $default_title)
@@ -27,7 +27,7 @@ path="${2:-"$default_path"}"
 
 title_slug="$(echo "$title" |\
               sed -E "s/[^a-zA-Z0-9 -.]+//g; s/ +/-/g" |\
-              tr "[[:upper:]]" "[[:lower:]]")"
+              tr "[:upper:]" "[:lower:]")"
 
 now="$(date +"%Y-%m-%dT%H:%M:%S%:z")"
 

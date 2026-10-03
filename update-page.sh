@@ -4,7 +4,7 @@ set -eu
 
 help="\
 $(basename "$0") title|date
-    
+
 Positional arguments:
     title   Change title of the page
     date    Update date of the page
@@ -35,7 +35,7 @@ case $input in
 
         title_slug="$(echo "$title" |\
                     sed -E "s/[^a-zA-Z0-9 -.]+/-/g; s/ +/-/g" |\
-                    tr "[[:upper:]]" "[[:lower:]]")"
+                    tr "[:upper:]" "[:lower:]")"
 
         new_path="$parent_path/$title_slug"
 
@@ -54,7 +54,7 @@ case $input in
 
         printf "%s\n" "Updated date of page inside $path to $now"
         ;;
-    
+
     *)
         printf "%s\n" "$input: command not found"
         exit 1
