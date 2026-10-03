@@ -15,8 +15,8 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "dev": "pnx @11ty/eleventy --serve",
-    "build": "pnx @11ty/eleventy"
+    "dev": "npx @11ty/eleventy --serve",
+    "build": "npx @11ty/eleventy"
   },
   "dependencies": {
     "@11ty/eleventy": "^3.1.5",
