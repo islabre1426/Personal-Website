@@ -2,16 +2,15 @@
 My personal website, built using 11ty.
 
 ## Dependencies
-- NodeJS
-- pnpm
+- NodeJS + npm
 - Unix utilities (basename, sed, tr, etc.) (Git Bash or a Unix-like OS preferred)
 - ssh (for authenticating server, setup first)
 
 ## Preview website from source
 ```bash
 git clone https://github.com/islabre1426/Personal-Website && cd Personal-Website
-pnpm install
-pnpm run dev
+npm install
+npm run dev
 ```
 
 ## License
