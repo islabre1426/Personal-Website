@@ -5,12 +5,32 @@
   <subtitle>The personal website of Islabre, a person who likes tech, cuteness, and thinking</subtitle>
   <link href="https://islabre.fyi/feed.xml" rel="self" />
   <link href="https://islabre.fyi/" />
-  <updated>2026-10-16T14:41:19Z</updated>
+  <updated>2026-10-28T10:26:35Z</updated>
   <id>https://islabre.fyi/</id>
   <author>
     <name>Islabre</name>
     <email>islabre1426@disroot.org</email>
   </author>
+  <entry>
+    <title>Writing code by myself</title>
+    <link href="https://islabre.fyi/posts/writing-code-by-myself/" />
+    <updated>2026-10-28T10:26:35Z</updated>
+    <id>https://islabre.fyi/posts/writing-code-by-myself/</id>
+    <content type="html">&lt;p&gt;I like writing code by myself. I say it with pride.&lt;/p&gt;
+&lt;p&gt;I don&#39;t want to use AI-generated code, even when it sometimes suggest decent-looking code.&lt;/p&gt;
+&lt;p&gt;Because &amp;quot;sometimes&amp;quot; is not convincing enough, and the risk is too high.&lt;/p&gt;
+&lt;p&gt;I want to experience the struggle of finding solution to a problem.&lt;/p&gt;
+&lt;p&gt;I want to feel like giving up because of not getting anywhere.&lt;/p&gt;
+&lt;p&gt;I want to feel the joy of finding out the solution. The joy of crafting high-quality work. The joy of understanding.&lt;/p&gt;
+&lt;p&gt;The progress is the point.&lt;/p&gt;
+&lt;p&gt;I then can explain how things work. Explain where the problem lies. Explain how to solve it.&lt;/p&gt;
+&lt;p&gt;I may end up being slower because of it. I may end up being looked down upon as scared and don&#39;t want to change.&lt;/p&gt;
+&lt;p&gt;But, I&#39;m willing to walk on this path.&lt;/p&gt;
+&lt;p&gt;Because it&#39;s the right path for me to go.&lt;/p&gt;
+&lt;p&gt;Because software engineering is not only about writing code.&lt;/p&gt;
+&lt;p&gt;Because I care.&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>Go slow</title>
     <link href="https://islabre.fyi/posts/go-slow/" />
