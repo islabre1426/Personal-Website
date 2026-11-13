@@ -5,10 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="color-scheme" content="light dark">
 
+    {% set tab_title %}{% block title %}{% endblock %}{% endset %}
+
+    <meta property="og:title" content="{{ tab_title }}">
+    <meta property="og:type" content="{% block og_type %}{% endblock %}">
+    <meta property="og:url" content="https://www.islabre.fyi/assets/favicon.png">
+    <meta property="og:image" content="https://www.islabre.fyi/favicon">
+
     <link rel="stylesheet" href="/assets/style.css">
+    <link rel="stylesheet" href="/assets/theme.css">
+
     <link rel="icon" href="/assets/favicon.png">
 
-    <title>{% block title %}{% endblock %} - Islabre's Personal Website</title>
+    <title>{{ tab_title }}</title>
 </head>
 <body>
     <header>
