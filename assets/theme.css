@@ -33,3 +33,7 @@ pre {
 hr {
     border-style: dashed;
 }
+
+ul {
+    list-style-type: "- ";
+}
