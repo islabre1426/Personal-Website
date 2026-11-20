@@ -2,6 +2,11 @@ body {
     font-family: monospace, monospace;
 }
 
+main h2, main h3, main h4, main h5, main h6 {
+    padding-bottom: 0.25em;
+    border-bottom: 1px solid;
+}
+
 h1::before {
     content: "# ";
 }
